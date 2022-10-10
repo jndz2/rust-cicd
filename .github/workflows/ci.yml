@@ -18,16 +18,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - uses: actions-rs/toolchain@v1
-      with:
-        profile: minimal
-        toolchain: stable
-        override: true
+    - name: Update rust
+      run: rustup update
     
-    - name: Run cargo test
-      uses: actions-rs/cargo@v1
-      with:
-        command: test
+    - name: Build project
+      run: cargo build --verbose
+
+    - name: Test project
+      run: cargo test --verbose >> $GITHUB_STEP_SUMMARY
         
   clippy_check:
     name: Clippy Check
