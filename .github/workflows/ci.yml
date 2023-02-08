@@ -10,43 +10,5 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  test:
-    name: Build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-      run: rustup update
-    
-      run: cargo build --verbose
-
-  clippy_check:
-    name: Clippy Check
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-        run: rustup update
-
-        run: rustup component add clippy
-
-        run: cargo clippy --workspace --all-targets --verbose --all-features
-
-
-  format_check:
-    name: Format Check
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-        run: rustup update
-
-        run: rustup component add rustfmt
-
-        run: cargo fmt --all -- --check
+  rust-ci:
+    uses: ./.github/workflows/rust-ci.yml
