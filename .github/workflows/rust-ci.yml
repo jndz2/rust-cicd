@@ -55,6 +55,8 @@ jobs:
       - run: rustup component add llvm-tools-preview
 
       - name: Download and install grcov
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh release download v0.8.13 -R github.com/mozilla/grcov  --pattern '*x86_64-unknown-linux-gnu.*' -O grcov.tar.bz2
           tar -xzf ./grcov.tar.bz2 -C $HOME/.local/bin
