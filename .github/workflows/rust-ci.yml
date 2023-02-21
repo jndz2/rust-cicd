@@ -70,5 +70,8 @@ jobs:
         run:
           cargo test
 
+      - name: Check if .local
+        run: ls $HOME/.local
+
       - name: Run grcov
         run: grcov -h
