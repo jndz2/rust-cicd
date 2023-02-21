@@ -60,7 +60,7 @@ jobs:
         run: |
           gh release download v0.8.13 -R github.com/mozilla/grcov  --pattern '*x86_64-unknown-linux-gnu.*' -O grcov.tar.bz2
           tar -xvf ./grcov.tar.bz2 -C $HOME/.local/share
-          echo "PATH=$HOME/.local/share:$PATH" >> $GITHUB_PATH
+          echo "$HOME/.local/share" >> $GITHUB_PATH
 
       - name: Run cargo test
         env:
@@ -71,7 +71,9 @@ jobs:
           cargo test
 
       - name: Check if .local
-        run: ls $HOME/.local/share
+        run: |
+          ls $HOME/.local/share
+          echo $PATH
 
       - name: Run grcov
         run: grcov -h
